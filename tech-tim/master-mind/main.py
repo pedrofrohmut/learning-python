@@ -24,7 +24,7 @@ def generate_answer():
     answer = []
     for _ in range(ANSWER_LEN):
         color = random.choice(COLORS)
-        code.append(color)
+        answer.append(color)
     return answer
 
 
@@ -63,3 +63,29 @@ def check_answer(guess, answer):
             incorrect_pos += 1
             color_counts[g_clr] -= 1
     return correct_pos_count, incorrect_pos_count
+
+
+def game():
+    print(f"Welcome to mastermind, you have {ANSWER_LEN} to guess the code.")
+    print("The valid colors are ", *COLORS)
+    answer = generate_answer()
+    for i in range(1, TRIES_LIMIT + 1):
+        guess = guess_code()
+        correct_count, incorrect_count = check_answer(guess, answer)
+        if correct_count == ANSWER_LEN:
+            print("You cracked the code in {i} tries!")
+            break
+        print(f"Correct positions: {correct_count} | Incorrect Positions: {incorrect_count}")
+    # TODO: Wtf! Else for forloop
+    else:
+        print("You ran out of tries, the code was: ", *code)
+
+# if __name__ == "__main__":
+#     game()
+
+
+def main():
+    game()
+
+
+main()

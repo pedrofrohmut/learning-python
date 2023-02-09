@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="content-section">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+	<legend class="border-bottom mb-4 pb-2">Sign In</legend>
+	<div class="mb-3">
+	  {{ form.email.label(class="form-label") }}
+	  {% if form.email.errors %}
+	    {{ form.email(class="form-control form-control-lg is-invalid") }}
+	    {% for error in form.email.errors %}
+	      <div class="invalid-feedback">{{ error }}</div>
+	    {% endfor %}
+	  {% else %}
+	    {{ form.email(class="form-control form-control-lg") }}
+	  {% endif %}
+	</div>
+	<div class="mb-3">
+	  {{ form.password.label(class="form-label") }}
+	  {% if form.password.errors %}
+	    {{ form.password(class="form-control form-control-lg") }}
+	    {% for error in form.password.errors %}
+	      <div class="invalid-feedback">{{ error }}</div>
+	    {% endfor %}
+	  {% else %}
+	    {{ form.password(class="form-control form-control-lg") }}
+	  {% endif %}
+	</div>
+	<div class="mb-3">
+	  <input type="submit" value="Submit" class="btn btn-primary" />
+          <small class="text-muted ml-2">
+            <a href="{{ url_for('users.request_reset_password') }}">Forgot password?</a>
+          </small>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Do you not have an account yet?
+      <a class="ml-2" href="{{ url_for('users.signup') }}">Sign Up</a>
+    </small>
+  </div>
+{% endblock content %}

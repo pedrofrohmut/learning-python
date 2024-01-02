@@ -1,0 +1,4 @@
+sudo docker exec -it goals-postgres psql --username didorgas --dbname goals_db
+
+sudo docker exec -it goals-postgres exec
+psql --username didorgas --dbname goals_db

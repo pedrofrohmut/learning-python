@@ -1,0 +1,8 @@
+sudo docker run -d \
+    --name goals-postgres \
+    -p 5432:5432 \
+    -e POSTGRES_PASSWORD=1234 \
+    -e POSTGRES_USER=didorgas \
+    -e POSTGRES_DB=goals_db \
+    -v $HOME/.docker/goals-postgres:/var/lib/postgresql/data \
+    postgres:latest

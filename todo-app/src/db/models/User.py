@@ -1,8 +1,8 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import mapped_column, relationship
 
-from db import db
-from db.models.TimestampMixin import TimestampMixin
+from src.db import db
+from src.db.models.TimestampMixin import TimestampMixin
 
 class User(db.Model, TimestampMixin):
     __tablename__ = "users"

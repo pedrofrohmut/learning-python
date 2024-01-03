@@ -1,6 +1,6 @@
 from flask import Flask
 
-from db import db
+from src.db import db
 from src.secret import SQLALCHEMY_DATABASE_URI
 
 # create the app
@@ -22,8 +22,6 @@ db.init_app(app)
 #     db.session.commit()
 #     print("User " + user.name + "added with success.")
 
-from src import users_routes
-from src import goals_routes
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+from src.routes import users_routes
+from src.routes import goals_routes
+from src.routes import pages_routes

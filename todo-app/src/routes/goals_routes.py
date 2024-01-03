@@ -1,4 +1,4 @@
-from app import app
+from src.app import app
 
 # POST addGoal /
 @app.post("/goals/")

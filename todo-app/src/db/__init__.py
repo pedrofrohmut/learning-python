@@ -6,5 +6,5 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 
-from db.models.User import User
-from db.models.Goal import Goal
+from src.db.models.User import User
+from src.db.models.Goal import Goal

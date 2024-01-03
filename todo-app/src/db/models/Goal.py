@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import mapped_column
 
-from db.models.TimestampMixin import TimestampMixin
-from db import db
+from src.db import db
+from src.db.models.TimestampMixin import TimestampMixin
 
 
 class Goal(db.Model, TimestampMixin):

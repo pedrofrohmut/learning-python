@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import redirect, render_template, request, session, url_for
 
 from src.app import app, bcrypt
 from src.db.data_access.users_data_access import add_user, find_by_email
@@ -52,7 +52,14 @@ def signIn():
                                error_message="User e-mail and password do not match",
                                email=email)
 
-    return render_template("home.html")
+    session["user_id"] = user.id
+    return redirect(url_for("home_page"))
+
+
+@app.post("/users/signout")
+def signout():
+    session.pop("user_id", None)
+    return redirect(url_for("signin_page"))
 
 
 # POST /verify

@@ -1,10 +1,12 @@
-from flask import render_template
+from flask import render_template, session
 
 from src.app import app
 
 @app.get("/")
 @app.get("/pages/home")
 def home_page():
+    # if session and session["user_id"]:
+    #     print("USER_ID: ", session["user_id"])
     return render_template("home.html")
 
 

@@ -2,8 +2,7 @@ from flask import redirect, render_template, request
 import bcrypt
 
 from src.app import app
-from src.db import db
-from src.db.models.User import User
+from src.db.data_access.users_data_access import add_user
 
 # Post /
 @app.post("/users/")
@@ -25,15 +24,14 @@ def signUp():
     password_hash = bcrypt.hashpw(bytes_password, bcrypt.gensalt())
     if not bcrypt.checkpw(bytes_password, password_hash):
         return render_template("error.html",
-            error_message="Error to generate a password hash. The hash does not match the password")
+                               error_message="Error to generate a password hash. The hash does not match the password")
 
-    user = User()
-    user.name = name
-    user.email = email
-    user.phone = phone
-    user.password_hash = password_hash
-    db.session.add(user)
-    db.session.commit()
+    add_user({
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "password_hash": password_hash
+    })
 
     return render_template("signin.html",
                            success_message="User added. You can now sign in.")

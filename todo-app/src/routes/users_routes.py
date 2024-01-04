@@ -1,8 +1,7 @@
-from flask import redirect, render_template, request
-import bcrypt
+from flask import render_template, request
 
-from src.app import app
-from src.db.data_access.users_data_access import add_user
+from src.app import app, bcrypt
+from src.db.data_access.users_data_access import add_user, find_by_email
 
 # Post /
 @app.post("/users/")
@@ -20,11 +19,11 @@ def signUp():
                                email=email,
                                phone=phone)
 
-    bytes_password = bytes(password, "UTF-8")
-    password_hash = bcrypt.hashpw(bytes_password, bcrypt.gensalt())
-    if not bcrypt.checkpw(bytes_password, password_hash):
+    password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    if not bcrypt.check_password_hash(password_hash, password):
         return render_template("error.html",
-                               error_message="Error to generate a password hash. The hash does not match the password")
+                               error_message="Error to generate a password hash. "
+                                             "The hash does not match the password")
 
     add_user({
         "name": name,
@@ -40,7 +39,20 @@ def signUp():
 # POST /signin
 @app.post("/users/signin")
 def signIn():
-    return "Sign In"
+    email = request.form["email"]
+    password = request.form["password"]
+
+    user = find_by_email(email)
+    if not user:
+        return render_template("signin.html",
+                               error_message="User not fond with this e-mail")
+
+    if not bcrypt.check_password_hash(user.password_hash, password):
+        return render_template("signin.html",
+                               error_message="User e-mail and password do not match",
+                               email=email)
+
+    return render_template("home.html")
 
 
 # POST /verify

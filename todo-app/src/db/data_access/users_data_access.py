@@ -9,3 +9,11 @@ def add_user(user_dto):
     user.password_hash = user_dto["password_hash"]
     db.session.add(user)
     db.session.commit()
+
+
+def find_by_email(email):
+    try:
+        user = db.session.execute(db.select(User).filter_by(email=email)).scalar_one()
+        return user
+    except:
+        return None

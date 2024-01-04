@@ -1,10 +1,14 @@
 from flask import Flask
+from flask_bcrypt import Bcrypt
 
 from src.db import db
 from src.secret import SQLALCHEMY_DATABASE_URI
 
 # create the app
 app = Flask(__name__)
+
+# Bcrypt class wrapper
+bcrypt = Bcrypt(app)
 
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI

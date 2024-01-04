@@ -1,81 +1,59 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Toda App - Sign In</title>
+{% extends "layout.html" %}
 
-        <!-- Font Awesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
+{% block content %}
+    {% if success_message %}
+        <div class="success-message">
+            {{ success_message }}
+        </div>
+    {% endif %}
 
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/static/main.css" />
-    </head>
-    <body>
+    {% if error_message %}
+        <div class="error-message">
+            {{ error_message }}
+        </div>
+    {% endif %}
 
-        <div class="container">
-            {% if success_message %}
-                <div class="success-message">
-                    {{ success_message }}
-                </div>
-            {% endif %}
+    <!-- Heading -->
+    <section class="heading">
+        <h1 class="page-title">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Sign In
+        </h1>
+        <p>Inform your credentials to access the dashboard</p>
+    </section>
 
-            {% if error_message %}
-                <div class="error-message">
-                    {{ error_message }}
-                </div>
-            {% endif %}
+    <!-- Sign Up Form -->
+    <section class="form">
+        <form method="post" action="/users/signin">
+            <!-- E-mail -->
+            <div class="form-group">
+                <label class="label-block">E-mail</label>
+                <input
+                    name="email"
+                    type="email"
+                    class="form-text"
+                    placeholder="Enter an E-mail address"
+                    required
+                    value="{{ email }}"
+                />
+            </div>
 
-            <!-- Heading -->
-            <section class="heading">
-                <h1 class="page-title">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    Sign In
-                </h1>
-                <p>Inform your credentials to access the dashboard</p>
-            </section>
+            <!-- Password -->
+            <div class="form-group">
+                <label class="label-block">Password</label>
+                <input
+                    name="password"
+                    type="password"
+                    class="form-text"
+                    placeholder="Enter a password for this e-mail"
+                    min="3"
+                    required
+                />
+            </div>
 
-            <!-- Sign Up Form -->
-            <section class="form">
-                <form method="post" action="/users/signin">
-                    <!-- E-mail -->
-                    <div class="form-group">
-                        <label class="label-block">E-mail</label>
-                        <input
-                            name="email"
-                            type="email"
-                            class="form-text"
-                            placeholder="Enter an E-mail address"
-                            required
-                            value="{{ email }}"
-                        />
-                    </div>
-
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label class="label-block">Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            class="form-text"
-                            placeholder="Enter a password for this e-mail"
-                            min="3"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn">Submit</button>
-                    </div>
-                </form>
-            </section>
-        </div><!--.container-->
-
-    </body>
-</html>
+            <div class="form-group">
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}

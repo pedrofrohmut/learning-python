@@ -1,111 +1,89 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Toda App - Sign Up</title>
+{% extends "layout.html" %}
 
-        <!-- Font Awesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
+{% block content %}
+    <!-- Heading -->
+    <section class="heading">
+        <h1 class="page-title">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Sign Up
+        </h1>
+        <p>Provide some information to register a new user</p>
+    </section>
 
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/static/main.css" />
-    </head>
-    <body>
+    <!-- Sign Up Form -->
+    <section class="form">
+        <form method="post" action="/users">
+            <!-- Name -->
+            <div class="form-group">
+                <label class="label-block">Name</label>
+                <input
+                    name="name"
+                    type="text"
+                    class="form-text"
+                    placeholder="Your full name"
+                    required
+                    value="{{ name }}"
+                />
+            </div>
 
-        <div class="container">
-            <!-- Heading -->
-            <section class="heading">
-                <h1 class="page-title">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    Sign Up
-                </h1>
-                <p>Provide some information to register a new user</p>
-            </section>
+            <!-- E-mail -->
+            <div class="form-group">
+                <label class="label-block">E-mail</label>
+                <input
+                    name="email"
+                    type="email"
+                    class="form-text"
+                    placeholder="Enter an E-mail address"
+                    required
+                    value="{{ email }}"
+                />
+            </div>
 
-            <!-- Sign Up Form -->
-            <section class="form">
-                <form method="post" action="/users">
-                    <!-- Name -->
-                    <div class="form-group">
-                        <label class="label-block">Name</label>
-                        <input
-                            name="name"
-                            type="text"
-                            class="form-text"
-                            placeholder="Your full name"
-                            required
-                            value="{{ name }}"
-                        />
-                    </div>
+            <!-- Phone -->
+            <div class="form-group">
+                <label class="label-block">Phone</label>
+                <input
+                    name="phone"
+                    type="text"
+                    class="form-text"
+                    placeholder="Phone number like: 999-999-9999"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    required
+                    value="{{ phone }}"
+                />
+            </div>
 
-                    <!-- E-mail -->
-                    <div class="form-group">
-                        <label class="label-block">E-mail</label>
-                        <input
-                            name="email"
-                            type="email"
-                            class="form-text"
-                            placeholder="Enter an E-mail address"
-                            required
-                            value="{{ email }}"
-                        />
-                    </div>
+            <!-- Password -->
+            <div class="form-group">
+                <label class="label-block">Password</label>
+                <input
+                    name="password"
+                    type="password"
+                    class="form-text"
+                    placeholder="Enter a password for this e-mail"
+                    min="3"
+                    required
+                />
+                {% if password_error %}
+                    <div class="form-error">{{ password_error }}</div>
+                {% endif %}
+            </div>
 
-                    <!-- Phone -->
-                    <div class="form-group">
-                        <label class="label-block">Phone</label>
-                        <input
-                            name="phone"
-                            type="text"
-                            class="form-text"
-                            placeholder="Phone number like: 999-999-9999"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                            required
-                            value="{{ phone }}"
-                        />
-                    </div>
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label class="label-block">Confirm Password</label>
+                <input
+                    name="confirm_password"
+                    type="password"
+                    class="form-text"
+                    placeholder="Retype your password to be sure"
+                    required
+                />
+            </div>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label class="label-block">Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            class="form-text"
-                            placeholder="Enter a password for this e-mail"
-                            min="3"
-                            required
-                        />
-                        {% if password_error %}
-                            <div class="form-error">{{ password_error }}</div>
-                        {% endif %}
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div class="form-group">
-                        <label class="label-block">Confirm Password</label>
-                        <input
-                            name="confirm_password"
-                            type="password"
-                            class="form-text"
-                            placeholder="Retype your password to be sure"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn">Submit</button>
-                    </div>
-                </form>
-            </section>
-        </div><!--.container-->
-
-    </body>
-</html>
+            <div class="form-group">
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}

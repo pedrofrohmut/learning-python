@@ -63,7 +63,7 @@ p {
 }
 
 .container {
-    margin: 2rem auto;
+    margin: 0 auto;
     max-width: 760px;
     width: 80%;
 }
@@ -165,19 +165,4 @@ section.heading p {
     color: var(--bRed);
     padding-left: 0.5em;
     margin-top: 0.8em;
-}
-
-.success-message,
-.error-message {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    padding: 1rem 0;
-}
-
-.success-message {
-    color: var(--green);
-}
-
-.error-message {
-    color: var(--bRed);
 }

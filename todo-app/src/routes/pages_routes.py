@@ -1,12 +1,13 @@
-from flask import render_template, session
+from flask import redirect, render_template, session, url_for
 
 from src.app import app
 
 @app.get("/")
 @app.get("/pages/home")
 def home_page():
-    # if session and session["user_id"]:
-    #     print("USER_ID: ", session["user_id"])
+    if not session or not session["user_id"]:
+        return render_template("signin.html",
+                               error_message="You must be signed in to access the todos")
     return render_template("home.html")
 
 

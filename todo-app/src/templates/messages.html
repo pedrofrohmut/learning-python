@@ -1,0 +1,45 @@
+<style>
+.success-message,
+.error-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 2rem 1rem;
+    border-radius: 0.5rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+}
+.success-message i,
+.error-message i {
+    position: relative;
+    top: 1px;
+}
+
+.success-message {
+    color: var(--gray-800);
+    background-color: var(--green);
+}
+
+.error-message {
+    color: var(--gray-800);
+    background-color: var(--bRed);
+}
+</style>
+
+<div class="container">
+    {% if success_message %}
+        <div class="message success-message">
+            Success: {{ success_message }}
+            <i class="fa-solid fa-x" onclick="hideSuccess()"></i>
+        </div>
+    {% endif %}
+
+    {% if error_message %}
+        <div class="message error-message">
+            Error: {{ error_message }}
+            <i class="fa-solid fa-x" onclick="hideError()"></i>
+        </div>
+    {% endif %}
+</div>

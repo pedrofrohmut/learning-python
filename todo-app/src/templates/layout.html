@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Toda App - Sign In</title>
+        <title>Toda App - {% block title %}{% endblock %}</title>
 
         <!-- Font Awesome -->
         <link
@@ -19,10 +19,15 @@
     </head>
     <body>
         <!-- Navbar -->
-        <div>Navbar</div>
+        {% include "navbar.html" %}
 
-        <div class="container">
+        <!-- Messages -->
+        {% include "messages.html" %}
+
+        <main class="container">
             {% block content %}{% endblock %}
-        </div><!--.container-->
+        </main>
+
+        <script type="text/javascript" src="/static/messages.js"></script>
     </body>
 </html>

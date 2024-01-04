@@ -3,7 +3,6 @@ from flask import redirect, render_template, request, session, url_for
 from src.app import app, bcrypt
 from src.db.data_access.users_data_access import add_user, find_by_email
 
-# Post /
 @app.post("/users/")
 def signUp():
     name = request.form["name"]
@@ -36,7 +35,6 @@ def signUp():
                            success_message="User added. You can now sign in.")
 
 
-# POST /signin
 @app.post("/users/signin")
 def signIn():
     email = request.form["email"]
@@ -57,22 +55,11 @@ def signIn():
         "name": user.name,
         "email": user.email
     }
+
     return redirect(url_for("home_page"))
 
 
 @app.post("/users/signout")
 def signout():
-    session.pop("user_id", None)
+    session.pop("user", None)
     return redirect(url_for("signin_page"))
-
-
-# POST /verify
-@app.post("/users/verify")
-def verify():
-    return "Verify"
-
-
-# GET /current
-@app.get("/users/current")
-def getCurrent():
-    return "Current"

@@ -29,6 +29,16 @@ header .container {
     color: var(--purple);
 }
 
+form {
+    display: inline;
+}
+
+button.nav-link {
+    border: 0;
+    background: transparent;
+    font-size: 1.2rem;
+}
+
 .nav-link:last-child {
     margin: 0;
 }
@@ -41,7 +51,10 @@ header .container {
         <nav>
             {% if "user" in session %}
                 <a href="{{ url_for("home_page") }}" class="nav-link">Home</a>
-                <a href="{{ url_for("signout") }}" class="nav-link">Sign Out</a>
+                <!-- <a href="{{ url_for("signout") }}" class="nav-link">Sign Out</a> -->
+                <form action="/users/signout" method="post">
+                    <button class="nav-link">Sign Out</button>
+                </form>
             {% else %}
                 <a href="{{ url_for("signin_page") }}" class="nav-link">Sign In</a>
                 <a href="{{ url_for("signup_page") }}" class="nav-link">Sign Up</a>

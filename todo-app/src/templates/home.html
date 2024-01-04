@@ -80,7 +80,7 @@
                 {% for goal in goals %}
                     <div class="goal">
                         <div class="content">{{ goal.text }}</div>
-                        <form action="/goals/{{ goal.id }}" method="delete">
+                        <form action="/goals/{{ goal.id }}/delete" method="post">
                             <button class="btn">
                                 <i class="fa-solid fa-trash-can"></i> Delete
                             </button>

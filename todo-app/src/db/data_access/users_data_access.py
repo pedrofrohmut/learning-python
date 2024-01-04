@@ -12,8 +12,8 @@ def add_user(user_dto):
 
 
 def find_by_email(email):
-    try:
-        user = db.session.execute(db.select(User).filter_by(email=email)).scalar_one()
+    user = db.session.execute(db.select(User).where(User.email == email)).scalar_one()
+    if user:
         return user
-    except:
+    else:
         return None

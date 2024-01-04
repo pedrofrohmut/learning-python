@@ -1,20 +1,19 @@
 from flask import render_template, session
 
 from src.app import app
+from src.db.data_access.goals_data_access import find_all_goals
 
 @app.get("/")
 @app.get("/pages/home")
 def home_page():
-    goals = [
-        { "id": 1, "text": "Goal 1" },
-        { "id": 2, "text": "Goal 2" },
-        { "id": 3, "text": "Goal 3" },
-        { "id": 4, "text": "Goal 4" },
-        { "id": 5, "text": "Goal 5" }
-    ]
     if not "user" in session:
         return render_template("signin.html",
                                error_message="You must be signed in to access the todos")
+
+    goals = find_all_goals(session["user"]["id"])
+
+    print("Goals: ", goals)
+
     return render_template("home.html", goals=goals)
 
 

@@ -1,24 +1,25 @@
+from flask import redirect, request, session, url_for
+from src.db.data_access.goals_data_access import add_goal, delete_goal
 from src.app import app
 
-# POST addGoal /
 @app.post("/goals")
 def add():
-    return "Add goal"
+    if not "user" in session:
+        return redirect(url_for("signin"))
+
+    add_goal({
+        "text": request.form["text"],
+        "user_id": session["user"]["id"]
+    })
+
+    return redirect(url_for("home_page"))
 
 
-# GET findAll /
-@app.get("/goals")
-def findAll():
-    return "Find all"
-
-
-# PUT updateGoal /:id
-@app.put("/goals/<id>")
-def update(id):
-    return "Update goal " + id
-
-
-# DELETE deleteGoal /:id
-@app.delete("/goals/<id>")
+@app.post("/goals/<id>/delete")
 def delete(id):
-    return "Delete goal " + id
+    if not "user" in session:
+        return redirect(url_for("signin"))
+
+    delete_goal(id)
+
+    return redirect(url_for("home_page"))

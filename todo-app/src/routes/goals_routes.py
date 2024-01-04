@@ -1,13 +1,13 @@
 from src.app import app
 
 # POST addGoal /
-@app.post("/goals/")
+@app.post("/goals")
 def add():
     return "Add goal"
 
 
 # GET findAll /
-@app.get("/goals/")
+@app.get("/goals")
 def findAll():
     return "Find all"
 

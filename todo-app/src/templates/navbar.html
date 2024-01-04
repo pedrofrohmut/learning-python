@@ -39,7 +39,7 @@ header .container {
         <a href="{{ url_for("home_page") }}" class="logo">Goals Setter</a>
 
         <nav>
-            {% if session["user_id"] %}
+            {% if "user" in session %}
                 <a href="{{ url_for("home_page") }}" class="nav-link">Home</a>
                 <a href="{{ url_for("signout") }}" class="nav-link">Sign Out</a>
             {% else %}

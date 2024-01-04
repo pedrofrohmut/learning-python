@@ -52,7 +52,11 @@ def signIn():
                                error_message="User e-mail and password do not match",
                                email=email)
 
-    session["user_id"] = user.id
+    session["user"] = {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email
+    }
     return redirect(url_for("home_page"))
 
 
